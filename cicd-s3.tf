@@ -18,9 +18,8 @@ resource "aws_s3_bucket_object" "website_objects" {
   source = "website/"
 
   # Specify the destination directory in the S3 bucket
-  # Here, assuming the content should be placed at the root of the bucket
-  # Adjust the "key" attribute as needed to place the content in a subdirectory
-  key    = ""
+  # Since the key attribute is set to ".", the content will be uploaded to the root directory of the bucket
+  key    = "."
 
   # Set ACL to public-read for public access
   acl    = "public-read"
