@@ -25,7 +25,4 @@ resource "aws_s3_bucket_object" "website_objects" {
   # Specify the destination directory in the S3 bucket
   # Since the key attribute is set to ".", the content will be uploaded to the root directory of the bucket
   key    = "."
-
-  # Set ACL to public-read for public access
-  acl    = "public-read"
 }
