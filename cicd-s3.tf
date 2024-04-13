@@ -1,29 +1,27 @@
-resource "aws_s3_bucket" "codepipeline_artifacts" {
-  bucket = "pipeline-artifacts-fatema"
-  acl    = "private"
-} 
-
+# Define the S3 bucket for hosting the static website
 resource "aws_s3_bucket" "static_website_bucket" {
   bucket = "my-static-website-fatema"  # Update with your desired bucket name
 
+  # Set the index document for the bucket
+  # This will serve index.html as the default document
   website {
     index_document = "index.html"
   }
 }
 
-resource "aws_s3_bucket_policy" "static_website_bucket_policy" {
+# Upload static website content to the S3 bucket
+resource "aws_s3_bucket_object" "website_objects" {
   bucket = aws_s3_bucket.static_website_bucket.id
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Sid = "PublicReadGetObject",
-        Effect = "Allow",
-        Principal = "*",
-        Action = ["s3:GetObject"],
-        Resource = aws_s3_bucket.static_website_bucket.arn,
-      },
-    ],
-  })
+  # Specify the source directory containing your static website content
+  # Here, assuming the website content is located in the "website" directory
+  source = "website/"
+
+  # Specify the destination directory in the S3 bucket
+  # Here, assuming the content should be placed at the root of the bucket
+  # Adjust the "key" attribute as needed to place the content in a subdirectory
+  key    = ""
+
+  # Set ACL to public-read for public access
+  acl    = "public-read"
 }
