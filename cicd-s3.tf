@@ -1,3 +1,8 @@
+resource "aws_s3_bucket" "codepipeline_artifacts" {
+  bucket = "pipeline-artifacts-fatema"
+  acl    = "private"
+} 
+
 # Define the S3 bucket for hosting the static website
 resource "aws_s3_bucket" "static_website_bucket" {
   bucket = "my-static-website-fatema"  # Update with your desired bucket name
