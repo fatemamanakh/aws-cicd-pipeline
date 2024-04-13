@@ -20,7 +20,7 @@ resource "aws_s3_bucket_object" "website_objects" {
 
   # Specify the source directory containing your static website content
   # Here, assuming the website content is located in the "website" directory
-  source = "website/"
+  source = "aws-cicd-pipeline-master/website/"
 
   # Specify the destination directory in the S3 bucket
   # Since the key attribute is set to ".", the content will be uploaded to the root directory of the bucket
