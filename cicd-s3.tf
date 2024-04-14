@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "codepipeline_artifacts" {
 
 # Define the S3 bucket for hosting the static website
 resource "aws_s3_bucket" "bucket" {
-  bucket = "my-static-website-fatema"
+  bucket = "my-static-website-fatema001"
   acl    = "public-read"
 
   website {
