@@ -9,9 +9,9 @@ resource "aws_s3_bucket" "static_website_bucket" {
   acl    = "public-read"
 
   provisioner "local-exec" {
-    command = "aws s3 sync static/ s3://${aws_s3_bucket.static_website_bucket} --acl public-read --delete"
-    
-  }
+  command = "aws s3 sync static/ s3://${aws_s3_bucket.static_website_bucket.bucket} --acl public-read --delete"
+}
+
   # Set the index document for the bucket
   # This will serve index.html as the default document
   website {
