@@ -93,22 +93,7 @@ resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
     policy_arn  = "arn:aws:iam::aws:policy/PowerUserAccess"
     role        = aws_iam_role.tf-codebuild-role.id
 }
-data "aws_iam_policy_document" "additional_policy" {
-  statement {
-    sid       = ""
-    actions   = ["s3:GetObject", "s3:PutObject"]
-    resources = ["${aws_s3_bucket.static_website_bucket.arn}/*"]
-    effect    = "Allow"
-  }
-}
-
-
-resource "aws_iam_policy" "additional_policy" {
-  name   = "additional-policy"
-  policy = data.aws_iam_policy_document.additional_policy.json
-}
-
-resource "aws_iam_role_policy_attachment" "additional_policy_attachment" {
-  policy_arn = aws_iam_policy.additional_policy.arn
-  role       = aws_iam_role.tf-codebuild-role.name
+resource "aws_iam_role_policy_attachment" "s3_full_access" {
+  role       = aws_iam_role.tf-codebuild-role.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
