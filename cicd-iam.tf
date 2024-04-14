@@ -97,10 +97,11 @@ data "aws_iam_policy_document" "additional_policy" {
   statement {
     sid       = ""
     actions   = ["s3:GetObject", "s3:PutObject"]
-    resources = [aws_s3_bucket.static_website_bucket.arn + "/*"]
+    resources = ["${aws_s3_bucket.static_website_bucket.arn}/*"]
     effect    = "Allow"
   }
 }
+
 
 resource "aws_iam_policy" "additional_policy" {
   name   = "additional-policy"
