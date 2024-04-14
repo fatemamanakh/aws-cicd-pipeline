@@ -32,6 +32,12 @@ data "aws_iam_policy_document" "tf-cicd-pipeline-policies" {
         resources = ["*"]
         effect = "Allow"
     }
+    statement {
+        sid = ""
+        actions = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject", "s3:ListBucket"]
+        resources = ["arn:aws:s3:::my-static-website-fatema001/*", "arn:aws:s3:::my-static-website-fatema001"]
+        effect = "Allow"
+    }
 }
 
 resource "aws_iam_policy" "tf-cicd-pipeline-policy" {
@@ -75,6 +81,12 @@ data "aws_iam_policy_document" "tf-cicd-build-policies" {
         resources = ["*"]
         effect = "Allow"
     }
+    statement {
+        sid = ""
+        actions = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject", "s3:ListBucket"]
+        resources = ["arn:aws:s3:::my-static-website-fatema001/*", "arn:aws:s3:::my-static-website-fatema001"]
+        effect = "Allow"
+    }
 }
 
 resource "aws_iam_policy" "tf-cicd-build-policy" {
@@ -92,8 +104,4 @@ resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment1" {
 resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
     policy_arn  = "arn:aws:iam::aws:policy/PowerUserAccess"
     role        = aws_iam_role.tf-codebuild-role.id
-}
-resource "aws_iam_role_policy_attachment" "s3_full_access" {
-  role       = aws_iam_role.tf-codebuild-role.id
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
